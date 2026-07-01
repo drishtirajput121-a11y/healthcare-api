@@ -8,32 +8,67 @@ A RESTful backend system for managing patients and doctors, built with Django, D
 - PostgreSQL
 - JWT Authentication (djangorestframework-simplejwt)
 
+---
+
 ## Setup Instructions
 
 ### 1. Clone the repo
+```bash
 git clone <your-repo-url>
-cd <project-folder>
+cd healthcare_api
+```
 
 ### 2. Create and activate virtual environment
+
+**macOS/Linux:**
+```bash
 python3 -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+source venv/bin/activate
+```
+
+**Windows:**
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
 
 ### 3. Install dependencies
+```bash
 pip install -r requirements.txt
+```
 
 ### 4. Configure environment variables
+```bash
 cp .env.example .env
-# Fill in your values in .env
+```
+Then open `.env` and fill in your values.
 
 ### 5. Set up PostgreSQL
+```bash
 sudo service postgresql start
-sudo -u postgres psql < create your DB and user as in .env >
+sudo -u postgres psql
+```
+Inside psql, run:
+```sql
+CREATE DATABASE healthcare_db;
+CREATE USER healthcare_user WITH PASSWORD 'yourpassword';
+GRANT ALL PRIVILEGES ON DATABASE healthcare_db TO healthcare_user;
+\q
+```
 
 ### 6. Run migrations
+```bash
 python manage.py migrate
+```
 
 ### 7. Start the server
+```bash
 python manage.py runserver
+```
+
+Visit `http://localhost:8000/api/health/` to confirm the API is running.
+
+---
 ## Architecture
 
 ```mermaid
