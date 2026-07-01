@@ -31,9 +31,12 @@ class PatientDoctorMappingSerializer(serializers.ModelSerializer):
         doctor = data.get('doctor')
 
         request = self.context.get('request')
+        if not request:
+            raise serializers.ValidationError("Authentication required.")
+
         if patient.created_by != request.user:
             raise serializers.ValidationError(
-                "You can only assign doctors to your own patients."
+            "You can only assign doctors to your own patients."
             )
 
         if PatientDoctorMapping.objects.filter(

@@ -16,7 +16,9 @@ class PatientDoctorMappingViewSet(viewsets.ModelViewSet):
         )
 
     def get_serializer_context(self):
-        return {'request': self.request}
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context
 
     @action(detail=False, url_path='patient/(?P<patient_id>[^/.]+)')
     def by_patient(self, request, patient_id=None):
