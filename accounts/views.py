@@ -5,7 +5,7 @@ from rest_framework import status
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .serializers import RegisterSerializer
+from .serializers import RegisterSerializer, LoginSerializer
 
 User = get_user_model()
 
@@ -41,29 +41,18 @@ class LoginView(APIView):
     permission_classes = [AllowAny]
 
     def post(self, request):
-        email = request.data.get('email', '').lower()
-        password = request.data.get('password', '')
+        serializer = LoginSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
 
-        if not email or not password:
-            return Response(
-                {'error': 'Email and password are required.'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
-        user = authenticate(request, username=email, password=password)
-
-        if not user:
-            return Response(
-                {'error': 'Invalid credentials.'},
-                status=status.HTTP_401_UNAUTHORIZED
-            )
+        user = serializer.validated_data["user"]
 
         tokens = get_tokens_for_user(user)
+
         return Response({
-            'user': {
-                'id': user.id,
-                'name': user.name,
-                'email': user.email,
+            "user": {
+                "id": user.id,
+                "name": user.name,
+                "email": user.email,
             },
-            'tokens': tokens,
-        }, status=status.HTTP_200_OK)
+            "tokens": tokens
+        })
