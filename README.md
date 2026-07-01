@@ -211,6 +211,10 @@ sequenceDiagram
 | GET | `/api/mappings/` | List all mappings | Yes |
 | GET | `/api/mappings/patient/<patient_id>/` | Get doctors for a patient | Yes |
 | DELETE | `/api/mappings/<id>/` | Remove mapping | Yes |
+
+> **Note:** `GET /api/mappings/patient/<patient_id>/` uses an explicit `patient/` 
+> prefix to avoid URL conflicts with `DELETE /api/mappings/<id>/`.
+
 ## Authentication
 All protected endpoints require a Bearer token in the header:
 Authorization: Bearer <access_token>
