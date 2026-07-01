@@ -53,9 +53,12 @@ Inside psql, run:
 CREATE DATABASE healthcare_db;
 CREATE USER healthcare_user WITH PASSWORD 'yourpassword';
 GRANT ALL PRIVILEGES ON DATABASE healthcare_db TO healthcare_user;
+
+-- Required for PostgreSQL 15+
+GRANT ALL ON SCHEMA public TO healthcare_user;
+ALTER DATABASE healthcare_db OWNER TO healthcare_user;
 \q
 ```
-
 ### 6. Run migrations
 ```bash
 python manage.py migrate
@@ -65,9 +68,19 @@ python manage.py migrate
 ```bash
 python manage.py runserver
 ```
+> Visit `http://localhost:8000/api/health/` to confirm the API is running.
+---
 
-Visit `http://localhost:8000/api/health/` to confirm the API is running.
+## Testing
 
+Import the Postman collection to test all endpoints:
+
+1. Download `healthcare_api.postman_collection.json` from the repo
+2. Open Postman → `Ctrl + O` → select the file
+3. In Postman, create a new environment with two variables:
+   - `base_url` → `http://localhost:8000`
+   - `token` → (leave blank)
+4. Hit **Register** first → then **Login** — token saves automatically for all requests
 ---
 ## Architecture
 
