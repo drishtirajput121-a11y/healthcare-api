@@ -20,7 +20,7 @@ class PatientDoctorMappingViewSet(viewsets.ModelViewSet):
         context['request'] = self.request
         return context
 
-    @action(detail=False, url_path='patient/(?P<patient_id>[^/.]+)')
+    @action(detail=False, url_path='(?P<patient_id>[^/.]+)')
     def by_patient(self, request, patient_id=None):
         mappings = self.get_queryset().filter(patient_id=patient_id)
         serializer = self.get_serializer(mappings, many=True)
