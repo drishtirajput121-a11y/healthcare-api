@@ -148,35 +148,34 @@ sequenceDiagram
 ### Auth
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
-| POST | /api/auth/register/ | Register new user | No |
-| POST | /api/auth/login/ | Login and get JWT | No |
+| POST | `/api/auth/register/` | Register new user | No |
+| POST | `/api/auth/login/` | Login and get JWT | No |
 
 ### Patients
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
-| POST | /api/patients/ | Create patient | Yes |
-| GET | /api/patients/ | List own patients | Yes |
-| GET | /api/patients/<id>/ | Get patient detail | Yes |
-| PUT | /api/patients/<id>/ | Update patient | Yes |
-| DELETE | /api/patients/<id>/ | Delete patient | Yes |
+| POST | `/api/patients/` | Create patient | Yes |
+| GET | `/api/patients/` | List own patients | Yes |
+| GET | `/api/patients/<id>/` | Get patient detail | Yes |
+| PUT | `/api/patients/<id>/` | Update patient | Yes |
+| DELETE | `/api/patients/<id>/` | Delete patient | Yes |
 
 ### Doctors
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
-| POST | /api/doctors/ | Create doctor | Yes |
-| GET | /api/doctors/ | List all doctors | Yes |
-| GET | /api/doctors/<id>/ | Get doctor detail | Yes |
-| PUT | /api/doctors/<id>/ | Update doctor | Yes |
-| DELETE | /api/doctors/<id>/ | Delete doctor | Yes |
+| POST | `/api/doctors/` | Create doctor | Yes |
+| GET | `/api/doctors/` | List all doctors | Yes |
+| GET | `/api/doctors/<id>/` | Get doctor detail | Yes |
+| PUT | `/api/doctors/<id>/` | Update doctor | Yes |
+| DELETE | `/api/doctors/<id>/` | Delete doctor | Yes |
 
 ### Mappings
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
-| POST | /api/mappings/ | Assign doctor to patient | Yes |
-| GET | /api/mappings/ | List all mappings | Yes |
-| GET | /api/mappings/patient/<id>/ | Get doctors for a patient | Yes |
-| DELETE | /api/mappings/<id>/ | Remove mapping | Yes |
-
+| POST | `/api/mappings/` | Assign doctor to patient | Yes |
+| GET | `/api/mappings/` | List all mappings | Yes |
+| GET | `/api/mappings/patient/<patient_id>/` | Get doctors for a patient | Yes |
+| DELETE | `/api/mappings/<id>/` | Remove mapping | Yes |
 ## Authentication
 All protected endpoints require a Bearer token in the header:
 Authorization: Bearer <access_token>
